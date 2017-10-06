@@ -49,6 +49,10 @@ export default class Board {
      *  Returns all searched squares (including the last square but not the first)
      */
     trawlUntilPiece(fromSquare, dRow, dCol) {
+        if (dRow === 0 && dCol === 0) {
+            return [];
+        }
+
         let searchedSquares = [];
 
         let currentSquare = Square.at(fromSquare.row + dRow, fromSquare.col + dCol); 

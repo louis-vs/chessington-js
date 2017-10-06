@@ -9,18 +9,12 @@ export default class Queen extends Piece {
     getAvailableMoves(board) {
         const currentSquare = board.findPiece(this);
         let moves = [];
-
-        for (let i = 0; i < 8; i++) {
-            moves.push(Square.at(currentSquare.row, i));
-            moves.push(Square.at(i, currentSquare.col));
-            moves.push(Square.at(currentSquare.row + i, currentSquare.col + i));
-            moves.push(Square.at(currentSquare.row + i, currentSquare.col - i));
-            moves.push(Square.at(currentSquare.row - i, currentSquare.col + i));
-            moves.push(Square.at(currentSquare.row - i, currentSquare.col - i));
+        for (let i = -1; i <= 1; i++) {
+            for (let j = -1; j <= 1; j++) {
+                moves.push(...board.trawlUntilPiece(currentSquare, i, j));
+            }
         }
 
-        const inBounds = (square) => square.row >= 0 && square.row < 8 && square.col >= 0 && square.col < 8;
-
-        return moves.filter((square) => !square.equals(currentSquare) && inBounds(square));
+        return moves;
     }
 }
