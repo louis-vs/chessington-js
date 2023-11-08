@@ -14,11 +14,12 @@ export default class Knight extends Piece {
             [-1, 1].forEach((coeff2) => {
                 moves.push(Square.at(currentSquare.row + 1 * coeff1, currentSquare.col + 2 * coeff2));
                 moves.push(Square.at(currentSquare.row + 2 * coeff1, currentSquare.col + 1 * coeff2));
-
             });
         });
 
-        return moves;
+        const inBounds = (square) => square.row >= 0 && square.row < 8 && square.col >= 0 && square.col < 8;
+
+        return moves.filter((square) => inBounds(square));
     }
 }
 
