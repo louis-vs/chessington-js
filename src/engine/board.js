@@ -59,7 +59,11 @@ export default class Board {
         while (this.isInBounds(currentSquare)) {
             searchedSquares.push(currentSquare);
 
-            if (this.getPiece(currentSquare)) {
+            const pieceOnCurrentSquare = this.getPiece(currentSquare);
+            if (pieceOnCurrentSquare) {
+                if (pieceOnCurrentSquare.player === this.currentPlayer) {
+                    searchedSquares.pop();
+                }
                 break;
             }
 
