@@ -56,14 +56,10 @@ export default class Board {
         let searchedSquares = [];
 
         let currentSquare = Square.at(fromSquare.row + dRow, fromSquare.col + dCol); 
-        while (this.isInBounds(currentSquare)) {
+        while (this.isInBounds(currentSquare) && !this.isOccupiedByFriendlyPiece(currentSquare)) {
             searchedSquares.push(currentSquare);
 
-            const pieceOnCurrentSquare = this.getPiece(currentSquare);
-            if (pieceOnCurrentSquare) {
-                if (pieceOnCurrentSquare.player === this.currentPlayer) {
-                    searchedSquares.pop();
-                }
+            if (this.getPiece(currentSquare)) {
                 break;
             }
 
