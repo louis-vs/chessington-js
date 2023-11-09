@@ -77,4 +77,10 @@ export default class Board {
         return square.row >= 0 && square.row < GameSettings.BOARD_SIZE 
             && square.col >= 0 && square.col < GameSettings.BOARD_SIZE;
     }
+    
+    isOccupiedByFriendlyPiece(square) {
+        const pieceOnCurrentSquare = this.getPiece(square);
+        
+        return pieceOnCurrentSquare && (pieceOnCurrentSquare.player === this.currentPlayer);
+    }
 }
