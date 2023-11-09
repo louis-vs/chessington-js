@@ -10,13 +10,12 @@ export default class Bishop extends Piece {
         const currentSquare = board.findPiece(this);
         let moves = [];
 
-        for (let i = -7; i < 8; i++) {
-            moves.push(Square.at(currentSquare.row + i, currentSquare.col + i));
-            moves.push(Square.at(currentSquare.row + i, currentSquare.col - i));
-        }
+        [-1, 1].forEach((i) => {
+            [-1, 1].forEach((j) => {
+            moves.push(...board.trawlUntilPiece(currentSquare, i, j))
+            });
+        });
 
-        const inBounds = (square) => square.row >= 0 && square.row < 8 && square.col >= 0 && square.col < 8;
-
-        return moves.filter((square) => !square.equals(currentSquare) && inBounds(square));
+        return moves
     }
 }
