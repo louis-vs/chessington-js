@@ -15,7 +15,7 @@ export default class Pawn extends Piece {
 
         const nextSquare = Square.at(currentSquare.row + directionCoeff, currentSquare.col);
 
-        if (board.getPiece(nextSquare) === undefined) {
+        if (board.isInBounds(nextSquare) && board.getPiece(nextSquare) === undefined) {
             moves.push(nextSquare);
 
             const nextNextSquare = Square.at(nextSquare.row + directionCoeff, nextSquare.col); 

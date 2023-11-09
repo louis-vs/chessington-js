@@ -16,6 +16,6 @@ export default class King extends Piece {
             }
         }
 
-        return moves.filter((square) => !square.equals(currentSquare));
+        return moves.filter((square) => !square.equals(currentSquare) && board.isInBounds(square));
     }
 }
