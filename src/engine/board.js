@@ -43,4 +43,30 @@ export default class Board {
             this.currentPlayer = (this.currentPlayer === Player.WHITE ? Player.BLACK : Player.WHITE);
         }
     }
+
+    /**
+     *  Searches the board in a given direction until you reach a piece.
+     *  Returns all searched squares (including the last square but not the first)
+     */
+    trawlUntilPiece(fromSquare, dRow, dCol) {
+        let searchedSquares = [];
+
+        let currentSquare = Square.at(fromSquare.row + dRow, fromSquare.col + dCol); 
+        while (this.isInBounds(currentSquare)) {
+            searchedSquares.push(currentSquare);
+
+            if (this.getPiece(currentSquare)) {
+                break;
+            }
+
+            currentSquare = Square.at(currentSquare.row + dRow, currentSquare.col + dCol);
+        }
+
+        return searchedSquares;
+    }
+
+    isInBounds(square) {
+        return square.row >= 0 && square.row < GameSettings.BOARD_SIZE 
+            && square.col >= 0 && square.col < GameSettings.BOARD_SIZE;
+    }
 }
