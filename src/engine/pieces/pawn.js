@@ -25,6 +25,15 @@ export default class Pawn extends Piece {
             }
         }
 
+        const takingSquares = [Square.at(currentSquare.row + directionCoeff, currentSquare.col - 1), 
+            Square.at(currentSquare.row + directionCoeff, currentSquare.col + 1)];
+
+        takingSquares.forEach((square) => {
+            if (board.isInBounds(square) && board.isOccupiedByOpposingPiece(square)) {
+                moves.push(square);
+            }
+        });
+
 
         return moves;
     }
