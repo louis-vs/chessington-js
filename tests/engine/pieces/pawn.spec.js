@@ -57,8 +57,8 @@ describe('Pawn', () => {
 
         it('cannot take friendly pieces', () => {
             const pawn = new Pawn(Player.WHITE);
-            const friendlyPieceLeft = new Pawn(Player.BLACK);
-            const friendlyPieceRight = new Pawn(Player.BLACK);
+            const friendlyPieceLeft = new Pawn(Player.WHITE);
+            const friendlyPieceRight = new Pawn(Player.WHITE);
             board.setPiece(Square.at(1, 3), pawn);
             board.setPiece(Square.at(2, 2), friendlyPieceLeft);
             board.setPiece(Square.at(2, 4), friendlyPieceRight);
@@ -119,8 +119,8 @@ describe('Pawn', () => {
 
         it('cannot take friendly pieces', () => {
             const pawn = new Pawn(Player.BLACK);
-            const friendlyPieceLeft = new Pawn(Player.WHITE);
-            const friendlyPieceRight = new Pawn(Player.WHITE);
+            const friendlyPieceLeft = new Pawn(Player.BLACK);
+            const friendlyPieceRight = new Pawn(Player.BLACK);
             board.setPiece(Square.at(6, 3), pawn);
             board.setPiece(Square.at(5, 2), friendlyPieceLeft);
             board.setPiece(Square.at(5, 4), friendlyPieceRight);
