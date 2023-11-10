@@ -56,7 +56,7 @@ export default class Board {
         let searchedSquares = [];
 
         let currentSquare = Square.at(fromSquare.row + dRow, fromSquare.col + dCol); 
-        while (this.isInBounds(currentSquare)) {
+        while (this.isInBounds(currentSquare) && !this.isOccupiedByFriendlyPiece(currentSquare)) {
             searchedSquares.push(currentSquare);
 
             if (this.getPiece(currentSquare)) {
@@ -72,5 +72,11 @@ export default class Board {
     isInBounds(square) {
         return square.row >= 0 && square.row < GameSettings.BOARD_SIZE 
             && square.col >= 0 && square.col < GameSettings.BOARD_SIZE;
+    }
+    
+    isOccupiedByFriendlyPiece(square) {
+        const pieceOnCurrentSquare = this.getPiece(square);
+        
+        return pieceOnCurrentSquare && (pieceOnCurrentSquare.player === this.currentPlayer);
     }
 }
