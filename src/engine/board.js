@@ -75,8 +75,15 @@ export default class Board {
     }
     
     isOccupiedByFriendlyPiece(square) {
-        const pieceOnCurrentSquare = this.getPiece(square);
+        const pieceOnSquare = this.getPiece(square);
         
-        return pieceOnCurrentSquare && (pieceOnCurrentSquare.player === this.currentPlayer);
+        return pieceOnSquare && (pieceOnSquare.player === this.currentPlayer);
+    }
+
+    isOccupiedByOpposingPiece(square) {
+        const pieceOnSquare = this.getPiece(square);
+        const opposingPlayer = (this.currentPlayer === Player.WHITE ? Player.BLACK : Player.WHITE);
+        
+        return pieceOnSquare && (pieceOnSquare.player === opposingPlayer);
     }
 }

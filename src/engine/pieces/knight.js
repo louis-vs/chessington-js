@@ -10,16 +10,14 @@ export default class Knight extends Piece {
         const currentSquare = board.findPiece(this);
         let moves = [];
 
-        [-1, 1].forEach((coeff1) => {
-            [-1, 1].forEach((coeff2) => {
-                moves.push(Square.at(currentSquare.row + 1 * coeff1, currentSquare.col + 2 * coeff2));
-                moves.push(Square.at(currentSquare.row + 2 * coeff1, currentSquare.col + 1 * coeff2));
+        [-1, 1].forEach((rowMultiplier) => {
+            [-1, 1].forEach((colMultiplier) => {
+                moves.push(Square.at(currentSquare.row + 1 * rowMultiplier, currentSquare.col + 2 * colMultiplier));
+                moves.push(Square.at(currentSquare.row + 2 * rowMultiplier, currentSquare.col + 1 * colMultiplier));
             });
         });
 
-        const inBounds = (square) => square.row >= 0 && square.row < 8 && square.col >= 0 && square.col < 8;
-
-        return moves.filter((square) => inBounds(square));
+        return moves.filter((square) => board.isInBounds(square) && !board.isOccupiedByFriendlyPiece(square));
     }
 }
 

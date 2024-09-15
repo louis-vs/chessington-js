@@ -12,7 +12,7 @@ export default class Bishop extends Piece {
 
         [-1, 1].forEach((i) => {
             [-1, 1].forEach((j) => {
-            moves.push(...board.trawlUntilPiece(currentSquare, i, j))
+                moves.push(...board.trawlUntilPiece(currentSquare, i, j))
             });
         });
 
