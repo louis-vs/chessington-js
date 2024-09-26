@@ -42,6 +42,31 @@ describe('Pawn', () => {
             moves.should.be.empty;
         });
 
+        it('can take opposing pieces', () => {
+            const pawn = new Pawn(Player.WHITE);
+            const opposingPieceLeft = new Pawn(Player.BLACK);
+            const opposingPieceRight = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(1, 3), pawn);
+            board.setPiece(Square.at(2, 2), opposingPieceLeft);
+            board.setPiece(Square.at(2, 4), opposingPieceRight);
+
+            const moves = pawn.getAvailableMoves(board);
+
+            moves.should.deep.include.members([Square.at(2, 2), Square.at(2, 4)]);
+        });
+
+        it('cannot take friendly pieces', () => {
+            const pawn = new Pawn(Player.WHITE);
+            const friendlyPieceLeft = new Pawn(Player.WHITE);
+            const friendlyPieceRight = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(1, 3), pawn);
+            board.setPiece(Square.at(2, 2), friendlyPieceLeft);
+            board.setPiece(Square.at(2, 4), friendlyPieceRight);
+
+            const moves = pawn.getAvailableMoves(board);
+
+            moves.should.not.deep.include.members([Square.at(2, 2), Square.at(2, 4)]);
+        });
     });
 
     describe('black pawns', () => {
@@ -78,6 +103,32 @@ describe('Pawn', () => {
 
             moves.should.be.empty;
         });
+
+        it('can take opposing pieces', () => {
+            const pawn = new Pawn(Player.BLACK);
+            const opposingPieceLeft = new Pawn(Player.WHITE);
+            const opposingPieceRight = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(6, 3), pawn);
+            board.setPiece(Square.at(5, 2), opposingPieceLeft);
+            board.setPiece(Square.at(5, 4), opposingPieceRight);
+
+            const moves = pawn.getAvailableMoves(board);
+
+            moves.should.deep.include.members([Square.at(5, 2), Square.at(5, 4)]);
+        });
+
+        it('cannot take friendly pieces', () => {
+            const pawn = new Pawn(Player.BLACK);
+            const friendlyPieceLeft = new Pawn(Player.BLACK);
+            const friendlyPieceRight = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(6, 3), pawn);
+            board.setPiece(Square.at(5, 2), friendlyPieceLeft);
+            board.setPiece(Square.at(5, 4), friendlyPieceRight);
+
+            const moves = pawn.getAvailableMoves(board);
+
+            moves.should.not.deep.include.members([Square.at(5, 2), Square.at(5, 4)]);
+        });
     });
 
     it('cannot move if there is a piece in front', () => {
@@ -101,5 +152,4 @@ describe('Pawn', () => {
 
         moves.should.not.deep.include(Square.at(4, 3));
     });
-
 });

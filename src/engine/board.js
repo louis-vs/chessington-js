@@ -78,5 +78,11 @@ export default class Board {
         const pieceOnCurrentSquare = this.getPiece(square);
         
         return pieceOnCurrentSquare && (pieceOnCurrentSquare.player === this.currentPlayer);
+
+    isOccupiedByOpposingPiece(square) {
+        const pieceOnSquare = this.getPiece(square);
+        const opposingPlayer = (this.currentPlayer === Player.WHITE ? Player.BLACK : Player.WHITE);
+        
+        return pieceOnSquare && (pieceOnSquare.player === opposingPlayer);
     }
 }
