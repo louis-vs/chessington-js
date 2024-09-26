@@ -17,9 +17,7 @@ export default class Knight extends Piece {
             });
         });
 
-        const inBounds = (square) => square.row >= 0 && square.row < 8 && square.col >= 0 && square.col < 8;
-
-        return moves.filter((square) => inBounds(square));
+        return moves.filter((square) => board.isInBounds(square) && !board.isOccupiedByFriendlyPiece(square));
     }
 }
 
